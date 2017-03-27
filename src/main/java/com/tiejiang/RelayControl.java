@@ -51,6 +51,8 @@ public class RelayControl extends XunFeiActivity{
 		_txtRead.setCursorVisible(false);      //����������еĹ�겻�ɼ�
 		_txtRead.setFocusable(false);           //�޽���
 		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+		int code = mTts.startSpeaking("语音合成成功", mTtsListener);
 			
 	}
 

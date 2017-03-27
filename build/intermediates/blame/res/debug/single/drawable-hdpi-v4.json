@@ -8,11 +8,11 @@
         "source": "/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/src/main/res/drawable-hdpi/car.png"
     },
     {
-        "merged": "/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/res/merged/debug/drawable-hdpi-v4/btn_tog.png",
-        "source": "/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/src/main/res/drawable-hdpi/btn_tog.png"
-    },
-    {
         "merged": "/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/res/merged/debug/drawable-hdpi-v4/btn.png",
         "source": "/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/src/main/res/drawable-hdpi/btn.png"
+    },
+    {
+        "merged": "/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/res/merged/debug/drawable-hdpi-v4/btn_tog.png",
+        "source": "/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/src/main/res/drawable-hdpi/btn_tog.png"
     }
 ]

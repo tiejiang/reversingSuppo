@@ -1,9 +1,5 @@
 [
     {
-        "merged": "/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/res/merged/debug/layout/ttsdemo.xml",
-        "source": "/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/src/main/res/layout/ttsdemo.xml"
-    },
-    {
         "merged": "/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/res/merged/debug/layout/main.xml",
         "source": "/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/src/main/res/layout/main.xml"
     },

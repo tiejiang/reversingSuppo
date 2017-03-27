@@ -32,7 +32,6 @@ public final class R {
         public static final int car_right=0x7f05000c;
         public static final int distance_display=0x7f050014;
         public static final int etShow=0x7f050016;
-        public static final int image_tts_set=0x7f050017;
         public static final int linearLayout1=0x7f050009;
         public static final int linearLayout2=0x7f05000d;
         public static final int linearLayout5=0x7f05000f;
@@ -40,21 +39,11 @@ public final class R {
         public static final int linearLayout7=0x7f050012;
         public static final int lvDevices=0x7f050007;
         public static final int tbtnSwitch=0x7f050002;
-        public static final int tts_btn_person_select=0x7f05001c;
-        public static final int tts_cancel=0x7f05001e;
-        public static final int tts_pause=0x7f05001f;
-        public static final int tts_play=0x7f05001d;
-        public static final int tts_radioCloud=0x7f05001a;
-        public static final int tts_radioLocal=0x7f05001b;
-        public static final int tts_rediogroup=0x7f050019;
-        public static final int tts_resume=0x7f050020;
-        public static final int tts_text=0x7f050018;
         public static final int tvtitle=0x7f050008;
     }
     public static final class layout {
         public static final int main=0x7f030000;
         public static final int relaycontrol=0x7f030001;
-        public static final int ttsdemo=0x7f030002;
     }
     public static final class string {
         public static final int app_name=0x7f040000;

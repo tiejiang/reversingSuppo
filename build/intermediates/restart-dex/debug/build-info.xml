@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instant-run
+    abi="armeabi-v7a,armeabi"
+    api-level="16"
+    format="7"
+    timestamp="28412385049971" >
+
+    <task
+        name="javac"
+        duration="58" />
+    <task
+        name="instant-run-dex"
+        duration="0" />
+    <task
+        name="instant-run-transform"
+        duration="27" />
+    <task
+        name="verifier"
+        duration="9" />
+
+    <artifact
+        location="/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/outputs/apk/ReversingSupport-debug.apk"
+        type="MAIN" />
+
+    <build timestamp="28412385049971" >
+        <artifact
+            location="/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/outputs/apk/ReversingSupport-debug.apk"
+            type="MAIN" />
+    </build>
+
+</instant-run>

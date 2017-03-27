@@ -262,6 +262,10 @@ public class testBlueTooth extends Activity {
 					e.printStackTrace();
 				}
 				testBlueTooth.this.finish();
+
+				//test code begin
+//				manageConnectedSocket();
+				//test code end
 			}
 		}
 	}

@@ -1,0 +1,9 @@
+CHANGED,/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/android/tools/fd/runtime/AppPatchesLoaderImpl.class
+CHANGED,/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/tiejiang/RelayControl$ConnectedThread$ReadRunnable$override.class
+CHANGED,/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/tiejiang/testBlueTooth$AcceptThread$override.class
+CHANGED,/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/tiejiang/testBlueTooth$ClickEvent$override.class
+CHANGED,/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/tiejiang/RelayControl$ConnectedThread$override.class
+CHANGED,/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/tiejiang/RelayControl$ClickEvent$override.class
+CHANGED,/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/tiejiang/RelayControl$override.class
+CHANGED,/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/tiejiang/XunFeiActivity$override.class
+CHANGED,/home/tiejiang/AndroidStudioProjects/MyApplicationonLinuxenvironment/ReversingSupport/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/tiejiang/RelayControl$MyHandler$override.class
