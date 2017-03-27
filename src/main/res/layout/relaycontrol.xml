@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="超声测距智能防碰撞报警系统"
+        android:text="倒车辅助系统"
         android:textAppearance="?android:attr/textAppearanceMedium" />
     <LinearLayout
         android:id="@+id/linearLayout1"
