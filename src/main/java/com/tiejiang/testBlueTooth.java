@@ -261,10 +261,10 @@ public class testBlueTooth extends Activity {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				testBlueTooth.this.finish();
+//				testBlueTooth.this.finish();
 
 				//test code begin
-//				manageConnectedSocket();
+				manageConnectedSocket();
 				//test code end
 			}
 		}

@@ -1,19 +1,26 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 10
-    buildToolsVersion "19.1.0"
+    compileSdkVersion 17
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.testBlueTooth"
-        minSdkVersion 10
-        targetSdkVersion 10
-    }
+        applicationId "com.tiejiang.application"
+        minSdkVersion 16
+        targetSdkVersion 16
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        sourceSets{
+            main{
+                jniLibs.srcDir'libs'
+            }
+        }
+
+
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            }
         }
     }
 }
