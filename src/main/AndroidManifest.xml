@@ -9,8 +9,8 @@
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:supportsRtl= "ture"
-        android:name="com.tiejiang.application.MyApplication"
+        android:supportsRtl= "true"
+        android:name="com.tiejiang.mapplication.MyApplication"
         >
         <activity android:name="com.tiejiang.testBlueTooth"
                   android:label="@string/app_name">

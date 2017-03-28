@@ -1,4 +1,4 @@
-package com.tiejiang.application;
+package com.tiejiang.mapplication;
 
 import android.app.Application;
 
@@ -19,7 +19,7 @@ public class MyApplication extends Application {
 
         // 注意： appid 必须和下载的SDK保持一致，否则会出现10407错误
 
-        SpeechUtility.createUtility(MyApplication.this, "appid=" + "58c5fb41");
+        SpeechUtility.createUtility(com.tiejiang.mapplication.MyApplication.this, "appid=" + "58c5fb41");
 
         // 以下语句用于设置日志开关（默认开启），设置成false时关闭语音云SDK日志打印
         // Setting.setShowLog(false);

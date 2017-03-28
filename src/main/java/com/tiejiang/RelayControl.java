@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import android.app.Activity;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -52,7 +52,7 @@ public class RelayControl extends XunFeiActivity{
 		_txtRead.setFocusable(false);           //�޽���
 		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-		int code = mTts.startSpeaking("语音合成成功", mTtsListener);
+//		int code = mTts.startSpeaking("语音合成成功", mTtsListener);
 			
 	}
 
