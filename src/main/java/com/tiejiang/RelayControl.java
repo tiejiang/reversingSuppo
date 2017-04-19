@@ -1,10 +1,5 @@
 package com.tiejiang;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,6 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 
 
 /**
@@ -34,6 +34,7 @@ public class RelayControl extends XunFeiActivity{
 	private Handler mHandler;	
 	private String  encodeType ="GBK";
 	private Vibrator mVibrator;
+	private String readStr1 = "";
 	long [] pattern = {100,400,100,400};   // ֹͣ ���� ֹͣ ����   
 	
 	@Override
@@ -196,10 +197,19 @@ public class RelayControl extends XunFeiActivity{
 						//setTitle("available"+len);
 						if (len > 0) {
 							byte[] btBuf = new byte[len];
-							System.arraycopy(temp, 0, btBuf, 0, btBuf.length);	
+							System.arraycopy(temp, 0, btBuf, 0, btBuf.length);
+							String sendToUI = readStr1;
 							//������
 				            String readStr1 = new String(btBuf,encodeType);
-				            mHandler.obtainMessage(01,len,-1,readStr1).sendToTarget();			            
+							sendToUI = sendToUI + readStr1;
+							Log.d("TIEJIANG", "sendToUI: " + sendToUI);
+							if (readStr1.contains("N") || readStr1.contains("H")){
+								mHandler.obtainMessage(01,len,-1,sendToUI).sendToTarget();
+								sendToUI = "";
+							}else if(readStr1.trim().length() > 7) {
+								sendToUI = "";
+							}
+//				            mHandler.obtainMessage(01,len,-1,readStr1).sendToTarget();
 						}			             
 			             Thread.sleep(wait);// ��ʱһ��ʱ�仺������
 						}catch (Exception e) {
@@ -218,15 +228,17 @@ public class RelayControl extends XunFeiActivity{
     		case 00:
     			isRecording=false;
     			_txtRead.setText("");
-    			_txtRead.setHint("socket�����ѹر�");
+    			_txtRead.setHint("socket已经关闭");
     			//_txtRead.setText("inStream establishment Failed!");
     			break;
     			
     		case 01:
     			//_txtRead.setText("");
     			String info=(String) msg.obj;
+				Log.d("TIEJIANG", "MSG.OBJ= " + info);
+				int code = mTts.startSpeaking(info, mTtsListener);
     			_txtRead.append(info);   
-    			AnalyzeData(info);
+//    			AnalyzeData(info);
     			break;    			
 
             default:	            
