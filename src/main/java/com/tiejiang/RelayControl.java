@@ -25,7 +25,7 @@ import java.io.UnsupportedEncodingException;
  * */
 
 public class RelayControl extends XunFeiActivity{
-	public static boolean isRecording = false;// �߳̿��Ʊ��		
+	public static boolean isRecording = false;
 	private Button releaseCtrl,btBack,distance_display;
 	private Button car_left, car_right, car_back;
 	private OutputStream outStream = null;	
@@ -35,22 +35,19 @@ public class RelayControl extends XunFeiActivity{
 	private String  encodeType ="GBK";
 	private Vibrator mVibrator;
 	private String readStr1 = "";
-	long [] pattern = {100,400,100,400};   // ֹͣ ���� ֹͣ ����   
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.relaycontrol);			
-		//�����߳�����
 		manageThread = new ConnectedThread();
 		mHandler = new MyHandler();
 		manageThread.Start();		
 		findMyView();		
-		setMyViewListener(); 		
-		setTitle("����ǰ���ȹر�socket����");
-		//���������ɼ�
-		_txtRead.setCursorVisible(false);      //����������еĹ�겻�ɼ�
-		_txtRead.setFocusable(false);           //�޽���
+		setMyViewListener();
+		setTitle("返回前需先关闭socket连接");
+		_txtRead.setCursorVisible(false);
+		_txtRead.setFocusable(false);
 		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
 //		int code = mTts.startSpeaking("语音合成成功", mTtsListener);
@@ -63,8 +60,7 @@ public class RelayControl extends XunFeiActivity{
 		car_back=(Button)findViewById(R.id.car_back);		
 		releaseCtrl=(Button)findViewById(R.id.button1);
 		btBack=(Button) findViewById(R.id.button2);	
-		distance_display=(Button)findViewById(R.id.distance_display);
-		_txtRead = (EditText) findViewById(R.id.etShow);		
+		_txtRead = (EditText) findViewById(R.id.etShow);
 	}
 
 	private void setMyViewListener() {	
@@ -91,18 +87,14 @@ public class RelayControl extends XunFeiActivity{
 	private	class ClickEvent implements View.OnClickListener {
 		@Override
 		public void onClick(View v) {			
-			if (v == releaseCtrl)// �ͷ�����
+			if (v == releaseCtrl)
 			{
 				try {
 					testBlueTooth.btSocket.close();
 					manageThread.Stop();
-					//testBlueTooth.serverThread.cancel();					
-					//Toast.makeText(getApplicationContext(), "socket�����ѹر�", Toast.LENGTH_SHORT);
-					setTitle("socket�����ѹر�");
+					setTitle("socket连接已关闭");
 				} catch (IOException e) {
-					//Log .e(TAG,"ON RESUME: Unable to close socket during connection failure", e2);
-					//Toast.makeText(getApplicationContext(), "�ر�����ʧ��", Toast.LENGTH_SHORT);
-					setTitle("�ر�����ʧ��");
+					setTitle("关闭连接失败");
 				}				
 			}else if (v == car_left) {
 				car_left.setBackgroundColor(Color.WHITE);
@@ -120,11 +112,10 @@ public class RelayControl extends XunFeiActivity{
 		}
 	}	
 	  public static void setEditTextEnable(TextView view,Boolean able){
-	       // view.setTextColor(R.color.read_only_color);   //����ֻ��ʱ��������ɫ
 	        if (view instanceof android.widget.EditText){
-	            view.setCursorVisible(able);      //����������еĹ�겻�ɼ�
-	            view.setFocusable(able);           //�޽���
-	            view.setFocusableInTouchMode(able);     //����ʱҲ�ò�������
+	            view.setCursorVisible(able);
+	            view.setFocusable(able);
+	            view.setFocusableInTouchMode(able);
 	        }
 	  }	
 	public void sendMessage(String message) {		
@@ -146,17 +137,16 @@ public class RelayControl extends XunFeiActivity{
 		}			
 		//while(true){
 		try {
-			outStream.write(msgBuffer);				
-			//Toast.makeText(getApplicationContext(), "����������..", Toast.LENGTH_SHORT);
-			setTitle("�ɹ�����ָ��:"+message);				
+			outStream.write(msgBuffer);
+			Log.d("TIEJIANG", "send command to MCU");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			//Log.e(TAG, "ON RESUME: Exception during write.", e);
-			Toast.makeText(getApplicationContext(), "��������ʧ��", Toast.LENGTH_SHORT).show();				
+			Toast.makeText(getApplicationContext(), "发送数据失败", Toast.LENGTH_SHORT).show();
 		}			
 	}	
 	 class ConnectedThread extends Thread {		
-		private InputStream inStream = null;// ��������������
+		private InputStream inStream = null;
 		private long wait;
 		private Thread thread;
 		
@@ -200,10 +190,10 @@ public class RelayControl extends XunFeiActivity{
 							System.arraycopy(temp, 0, btBuf, 0, btBuf.length);
 							String sendToUI = readStr1;
 							//������
-				            String readStr1 = new String(btBuf,encodeType);
+				            readStr1 = new String(btBuf,encodeType);
 							sendToUI = sendToUI + readStr1;
-							Log.d("TIEJIANG", "sendToUI: " + sendToUI);
-							if (readStr1.contains("N") || readStr1.contains("H")){
+							Log.d("TIEJIANG", "sendToUI: " + sendToUI + " length= " + readStr1.length());
+							if ( readStr1.length() > 15 && readStr1.length() < 20){
 								mHandler.obtainMessage(01,len,-1,sendToUI).sendToTarget();
 								sendToUI = "";
 							}else if(readStr1.trim().length() > 7) {
@@ -211,7 +201,7 @@ public class RelayControl extends XunFeiActivity{
 							}
 //				            mHandler.obtainMessage(01,len,-1,readStr1).sendToTarget();
 						}			             
-			             Thread.sleep(wait);// ��ʱһ��ʱ�仺������
+			             Thread.sleep(wait);
 						}catch (Exception e) {
 							// TODO Auto-generated catch block
 							mHandler.sendEmptyMessage(00);
@@ -220,7 +210,13 @@ public class RelayControl extends XunFeiActivity{
 				}
 			}
 		}	
-	}	
+	}
+
+	/*
+	* the received data type is as flows:
+	* MSG.OBJ= D, 16, 5, 12, N, H
+	*     right  left  back left right
+	* **/
 	 private class MyHandler extends Handler{ 
     	@Override		    
         public void dispatchMessage(Message msg) { 
@@ -234,11 +230,11 @@ public class RelayControl extends XunFeiActivity{
     			
     		case 01:
     			//_txtRead.setText("");
-    			String info=(String) msg.obj;
-				Log.d("TIEJIANG", "MSG.OBJ= " + info);
-				int code = mTts.startSpeaking(info, mTtsListener);
+    			String info = (String) msg.obj;
+				Log.d("TIEJIANG", "MSG.OBJ= " + info + ",  length= " + info.length());
+				int code = mTts.startSpeaking("播放", mTtsListener);
     			_txtRead.append(info);   
-//    			AnalyzeData(info);
+    			AnalyzeData(info);
     			break;    			
 
             default:	            
@@ -247,34 +243,31 @@ public class RelayControl extends XunFeiActivity{
     	}
     	public void AnalyzeData(String data){
     		
-    		String[] tempData = new String[3];    		
-    		String[] ArrayDistance = new String[3];    		
-    		int distance = 0;
+    		String[] tempData = new String[6];
+			String leftAlarm = " ";
+			String rightAlarm = " ";
+    		int right, left, back;
+
     		tempData = data.split(",");
-    		System.out.println("ԭʼ����Ϊ��"+data);
-    		System.out.println("����ĳ���Ϊ��"+tempData.length);
-    		System.out.println("���鳤��Ϊ1ʱ��-Data=" + data);
-//    		if (data.equals("1")) {
-//    			car_left.setBackgroundColor(Color.RED);
-//				mVibrator.vibrate(pattern,2);
-//				Log.d("EQUALS", "111");
-//			}else if (data.equals("3")) {
-//    			car_right.setBackgroundColor(Color.RED);
-//				mVibrator.vibrate(pattern,2);
-//				Log.d("EQUALS", "333");
-//			}
-//    		if (tempData.length>1) {
-//    			ArrayDistance = tempData[1].split("\\."); //'.'Ϊ����ͨ��ת���ַ��ķ�ʽ���ܹ�ʹ��split����
-//				Log.d("distance=", ArrayDistance[0]);
-//				distance = Integer.parseInt(ArrayDistance[0].trim());//ע��ȥ��ǰ��ո�
-//				distance_display.setText(distance+" cm");				
-//
-//				Log.d("����ڶ�λ��ֵ��", tempData[1]);					
-//				if (distance>0 && distance<20) {
-//					car_back.setBackgroundColor(Color.RED);
-//					mVibrator.vibrate(pattern,2);   //�ظ����������pattern ���ֻ����һ�Σ�index��Ϊ-1	
-//				}			
-//			}
+			for (int i = 0; i < tempData.length; i ++){
+				tempData[i] = tempData[i].trim();
+				Log.d("TIEJIANG", "tempData[]= " + tempData[i]);
+			}
+			right = Integer.parseInt(tempData[1]);
+			left = Integer.parseInt(tempData[2]);
+			back = Integer.parseInt(tempData[3]);
+			leftAlarm = tempData[4];
+			rightAlarm = tempData[5];
+			if (right < 10){
+				mTts.startSpeaking("距离右边小于" + tempData[1] + "厘米， 左转", mTtsListener);
+			}
+			else if (left < 10){
+				mTts.startSpeaking("距离左边小于" + tempData[12] + "厘米， 右转", mTtsListener);
+			}else if (back < 10){
+				mTts.startSpeaking("停止倒车，修正位置", mTtsListener);
+			}else {
+				mTts.startSpeaking("继续倒车， 注意两侧距离", mTtsListener);
+			}
     	}
 	 }	
 }

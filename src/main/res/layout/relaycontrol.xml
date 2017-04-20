@@ -71,26 +71,6 @@
             android:layout_weight="1"
             android:text="返回" />
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center" >
-        <Button
-            android:id="@+id/button_dis"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="实时车距 :" />
-
-        <Button
-            android:id="@+id/distance_display"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout6"

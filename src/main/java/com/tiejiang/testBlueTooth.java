@@ -68,7 +68,7 @@ public class testBlueTooth extends Activity {
 		lvBTDevices.setAdapter(adtDevices);
 		lvBTDevices.setOnItemClickListener(new ItemClickEvent());			
 
-		btAdapt = BluetoothAdapter.getDefaultAdapter();// ��ʼ��������������
+		btAdapt = BluetoothAdapter.getDefaultAdapter();
 		uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 		
 		if(btAdapt == null){
@@ -80,17 +80,15 @@ public class testBlueTooth extends Activity {
 			if (btAdapt.getState() == BluetoothAdapter.STATE_OFF)// ��ȡ����״̬����ʾ
 				{
 				tbtnSwitch.setChecked(true);
-				Toast.makeText(testBlueTooth.this, "������δ��,��������ȴ�����", Toast.LENGTH_LONG).show();				
+					Toast.makeText(testBlueTooth.this, "蓝牙尚未打开,服务端需先打开蓝牙", Toast.LENGTH_LONG).show();
 				}
 			else if (btAdapt.getState() == BluetoothAdapter.STATE_ON){			
 				tbtnSwitch.setChecked(false);
-				//����˼���
 				serverThread=new AcceptThread();
 				serverThread.start();				
 			}	
-			// ע��Receiver����ȡ�����豸��صĽ��
 			IntentFilter intent = new IntentFilter();
-			intent.addAction(BluetoothDevice.ACTION_FOUND);// ��BroadcastReceiver��ȡ���������
+			intent.addAction(BluetoothDevice.ACTION_FOUND);
 			intent.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
 			intent.addAction(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
 			intent.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
@@ -98,9 +96,7 @@ public class testBlueTooth extends Activity {
 		}			
 	}
 	private void manageConnectedSocket() {
-		//setTitle("��⵽�������룡");
 		btSocket=socket;
-		//�򿪿��Ƽ̵���ʵ��
 		Intent intent = new Intent();
 		intent.setClass(testBlueTooth.this, RelayControl.class);
 		startActivity(intent);
@@ -110,17 +106,15 @@ public class testBlueTooth extends Activity {
 			String action = intent.getAction();
 			Bundle b = intent.getExtras();
 			Object[] lstName = b.keySet().toArray();
-			// ��ʾ�����յ�����Ϣ����ϸ��
 			for (int i = 0; i < lstName.length; i++) {
 				String keyName = lstName[i].toString();
 				Log.e(keyName, String.valueOf(b.get(keyName)));
 			}
-			//�����豸ʱ��ȡ���豸��MAC��ַ
 			if (BluetoothDevice.ACTION_FOUND.equals(action)) {
 				BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 				String str= device.getName() + "|" + device.getAddress();				
-				if (lstDevices.indexOf(str) == -1)// ��ֹ�ظ����
-					lstDevices.add(str); // ��ȡ�豸���ƺ�mac��ַ
+				if (lstDevices.indexOf(str) == -1)
+					lstDevices.add(str);
 				adtDevices.notifyDataSetChanged();
 			}
 		}
@@ -200,11 +194,9 @@ public class testBlueTooth extends Activity {
 				//btSocket = btDev.createRfcommSocketToServiceRecord(uuid);				
 				btSocket.connect();				
 				Log.e(TAG, " BT connection established, data transfer link open.");
-				
-				Toast.makeText(testBlueTooth.this, "���ӳɹ�,������ƽ���", Toast.LENGTH_SHORT).show();
-				//setTitle("���ӳɹ�");
-				
-				//�򿪿��Ƽ̵���ʵ��
+
+				Toast.makeText(testBlueTooth.this, "连接成功,进入控制界面", Toast.LENGTH_SHORT).show();
+
 				Intent intent = new Intent();
 				intent.setClass(testBlueTooth.this, RelayControl.class);
 				startActivity(intent);
@@ -212,8 +204,7 @@ public class testBlueTooth extends Activity {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				Log.e(TAG, " Connection failed.", e);	
-				//Toast.makeText(getApplicationContext(), "����ʧ��", Toast.LENGTH_SHORT);
-				setTitle("����ʧ��..");
+				setTitle("连接失败..");
 			}		
 		}
 	}
@@ -221,16 +212,16 @@ public class testBlueTooth extends Activity {
 	private	class ClickEvent implements View.OnClickListener {
 		@Override
 		public void onClick(View v) {
-			if (v == btnSearch)// ���������豸����BroadcastReceiver��ʾ���
+			if (v == btnSearch)
 			{
 				if (btAdapt.getState() == BluetoothAdapter.STATE_OFF) {// ���������û����
-					Toast.makeText(testBlueTooth.this, "���ȴ�����", 1000).show();
+					Toast.makeText(testBlueTooth.this, "请先打开蓝牙", 1000).show();
 					return;
 				}
-				setTitle("����������ַ��" + btAdapt.getAddress());
+				setTitle("本机蓝牙地址：" + btAdapt.getAddress());
 				lstDevices.clear();
 				btAdapt.startDiscovery();
-			} else if (v == tbtnSwitch) {// ������������/�ر�
+			} else if (v == tbtnSwitch) {
 				if (tbtnSwitch.isChecked() == false)				
 				{					
 					btAdapt.enable();
@@ -239,11 +230,10 @@ public class testBlueTooth extends Activity {
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					} //��ͣ1����
-					//����˼���
+					}
 					serverThread=new AcceptThread();
 					serverThread.start();
-					Toast.makeText(testBlueTooth.this, "����˼����Ѵ�", 1000).show();						
+					Toast.makeText(testBlueTooth.this, "服务端监听已打开", 1000).show();
 				}				
 				else if (tbtnSwitch.isChecked() == true)
 					btAdapt.disable();

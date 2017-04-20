@@ -23,6 +23,9 @@ android {
             }
         }
     }
+    compileOptions {
+        encoding "utf-8"
+    }
 }
 
 dependencies {
