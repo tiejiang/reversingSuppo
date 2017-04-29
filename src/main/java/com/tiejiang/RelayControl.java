@@ -232,7 +232,7 @@ public class RelayControl extends XunFeiActivity{
     			//_txtRead.setText("");
     			String info = (String) msg.obj;
 				Log.d("TIEJIANG", "MSG.OBJ= " + info + ",  length= " + info.length());
-				int code = mTts.startSpeaking("播放", mTtsListener);
+//				int code = mTts.startSpeaking("播放", mTtsListener);
     			_txtRead.append(info);   
     			AnalyzeData(info);
     			break;    			
@@ -256,18 +256,30 @@ public class RelayControl extends XunFeiActivity{
 			right = Integer.parseInt(tempData[1]);
 			left = Integer.parseInt(tempData[2]);
 			back = Integer.parseInt(tempData[3]);
-			leftAlarm = tempData[4];
-			rightAlarm = tempData[5];
-			if (right < 10){
-				mTts.startSpeaking("距离右边小于" + tempData[1] + "厘米， 左转", mTtsListener);
+//			leftAlarm = tempData[4];
+//			rightAlarm = tempData[5];
+			// 上一次播报结束后才进行到第二次数据判断的播报
+//			mTts.startSpeaking("10", mTtsListener); // test
+			Log.d("TIEJIANG", "isPlayEnd= " + isPlayEnd);
+			if (isPlayEnd){
+				if (right < 10){
+					mTts.startSpeaking("距离右边小于" + tempData[1] + "厘米， 左转", mTtsListener);
+					car_right.setBackgroundColor(Color.RED);
+				}else if (left < 10){
+					mTts.startSpeaking("距离左边小于" + tempData[2] + "厘米， 右转", mTtsListener);
+					car_left.setBackgroundColor(Color.RED);
+				}else if (back < 10){
+					car_back.setBackgroundColor(Color.RED);
+					mTts.startSpeaking("停止倒车，修正位置", mTtsListener);
+				}else {
+					mTts.startSpeaking("继续倒车， 注意两侧距离", mTtsListener);
+					car_back.setBackgroundColor(Color.WHITE);
+					car_left.setBackgroundColor(Color.WHITE);
+					car_right.setBackgroundColor(Color.WHITE);
+				}
+				isPlayEnd = false;
 			}
-			else if (left < 10){
-				mTts.startSpeaking("距离左边小于" + tempData[12] + "厘米， 右转", mTtsListener);
-			}else if (back < 10){
-				mTts.startSpeaking("停止倒车，修正位置", mTtsListener);
-			}else {
-				mTts.startSpeaking("继续倒车， 注意两侧距离", mTtsListener);
-			}
+
     	}
 	 }	
 }

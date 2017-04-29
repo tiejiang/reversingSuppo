@@ -27,6 +27,9 @@ public abstract class XunFeiActivity extends Activity implements OnClickListener
 	// 引擎类型
 	private String mEngineType = SpeechConstant.TYPE_CLOUD;
 
+	//是否播放结束
+	protected boolean isPlayEnd = true;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -206,6 +209,7 @@ public abstract class XunFeiActivity extends Activity implements OnClickListener
 		public void onCompleted(SpeechError error) {
 			if (error == null) {
 				Log.d("TIEJIANG","播放完成");
+				isPlayEnd = true;
 			} else if (error != null) {
 //				showTip(error.getPlainDescription(true));
 			}
